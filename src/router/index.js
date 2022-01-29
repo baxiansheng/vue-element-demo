@@ -69,6 +69,13 @@ const routes = [
       return import("../views/application/Request.vue");
     },
   },
+  {
+    path: "/detect",
+    name: "Detect",
+    component: function () {
+      return import("../views/application/Detect.vue");
+    },
+  },
 ];
 
 const router = new VueRouter({

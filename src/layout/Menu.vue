@@ -25,6 +25,7 @@
       <el-menu-item index="card">卡片</el-menu-item>
       <el-menu-item index="carousel">滚动</el-menu-item>
       <el-menu-item index="request">请求</el-menu-item>
+      <el-menu-item index="detect">漏洞检测</el-menu-item>
     </el-submenu>
     <el-menu-item index="document">
       <i class="el-icon-document"></i>
