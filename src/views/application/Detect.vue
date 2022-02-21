@@ -3,10 +3,10 @@
     <div class="title">上传代码</div>
     <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
       <el-tab-pane label="手动输入" name="typein"
-        ><div style="text-align: left">
+        ><div style="text-align: left; height: 330px">
           <el-input
             type="textarea"
-            :rows="20"
+            :rows="13"
             :placeholder="palceholder"
             v-model="textarea"
             resize="none"
@@ -98,7 +98,7 @@
       </el-card>
     </div>
     <div class="block"></div>
-    <el-card style="width: 100%; height: 680px">
+    <el-card style="width: 100%; height: 400px">
       <div class="el-descriptions__header" style="font-weight: bold">
         漏洞代码图谱
       </div>
@@ -127,7 +127,7 @@
 }
 .el-upload-dragger {
   width: 100%;
-  height: 432px;
+  height: 250px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,19 +164,20 @@ void demo() {
   int b = a[3];
   char c = 'c';
   char d = c;
+  int e = 2;
   if(b>0) {
-    printf('1');
+    int f = e / 0; 
   }
 }
 `;
 let sourceCodeList = [
   {
     code: `void demo() {`,
-    type: "danger",
+    type: "normal",
   },
   {
     code: `  int a[2];`,
-    type: "danger",
+    type: "normal",
   },
   {
     code: `  int b = a[3];`,
@@ -192,10 +193,10 @@ let sourceCodeList = [
   },
   {
     code: `  if(b>0) {`,
-    type: "danger",
+    type: "normal",
   },
   {
-    code: `    printf('1');`,
+    code: `    int f = e / 0;`,
     type: "danger",
   },
   {

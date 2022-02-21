@@ -76,6 +76,13 @@ const routes = [
       return import("../views/application/Detect.vue");
     },
   },
+  {
+    path: "/series",
+    name: "Series",
+    component: function () {
+      return import("../views/application/Series.vue");
+    },
+  },
 ];
 
 const router = new VueRouter({
