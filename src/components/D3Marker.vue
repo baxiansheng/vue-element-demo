@@ -284,7 +284,7 @@ export default {
               ? "#5CD0E7"
               : node.type === "IfCond"
               ? "#6264F4"
-              : "#BC5AE7"; //benjingse
+              : "red"; //benjingse
           return color;
         })
         .style("stroke", function (node) {
@@ -301,7 +301,7 @@ export default {
               ? "#04ACCD"
               : node.type === "IfCond"
               ? "#2629F2"
-              : "#A713E7"; //圆圈线条颜色
+              : "red"; //圆圈线条颜色
           return color;
         })
         .style("stroke-width", 2)

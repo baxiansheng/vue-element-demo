@@ -36,14 +36,32 @@
     </el-tabs>
     <div class="block"></div>
     <div class="title">检测结果</div>
+    <el-card style="width: 100%; height: 350px; text-align: initial">
+      <div class="el-descriptions__header" style="font-weight: bold">
+        漏洞代码位置
+      </div>
+      <div
+        v-for="sentence in sourceCodeList"
+        :key="sentence.code"
+        style="margin: 10px 0px"
+      >
+        <pre :class="sentence.type == 'danger' ? 'danger' : 'normal'">{{
+          sentence.code
+        }}</pre>
+      </div>
+    </el-card>
+    <div class="block"></div>
     <div style="width: 100%; display: flex; justify-content: space-between">
-      <el-card style="width: 42%; height: 350px">
+      <el-card
+        style="width: 48.5%; height: 350px"
+        v-for="info in infos"
+        :key="info.id"
+      >
         <el-descriptions
           title="漏洞信息"
           :column="1"
           border
           :labelStyle="{ width: '130px' }"
-          v-model="info"
         >
           <el-descriptions-item>
             <template slot="label">
@@ -82,23 +100,9 @@
           </el-descriptions-item>
         </el-descriptions>
       </el-card>
-      <el-card style="width: 55%; height: 350px; text-align: initial">
-        <div class="el-descriptions__header" style="font-weight: bold">
-          漏洞代码位置
-        </div>
-        <div
-          v-for="sentence in sourceCodeList"
-          :key="sentence.code"
-          style="margin: 10px 0px"
-        >
-          <pre :class="sentence.type == 'danger' ? 'danger' : 'normal'">{{
-            sentence.code
-          }}</pre>
-        </div>
-      </el-card>
     </div>
     <div class="block"></div>
-    <el-card style="width: 100%; height: 400px">
+    <el-card style="width: 100%; height: 650px">
       <div class="el-descriptions__header" style="font-weight: bold">
         漏洞代码图谱
       </div>
@@ -209,13 +213,22 @@ let sourceCodeList = [
   },
 ];
 
-let info = {
-  type: "数组使用相关漏洞",
-  reason: "数组越界访问",
-  code: "AUCVL",
-  loc: "3:7",
-  info: "无",
-};
+let infos = [
+  {
+    type: "数组使用相关漏洞",
+    reason: "数组越界访问",
+    code: "AUCVL",
+    loc: "3:7",
+    info: "无",
+  },
+  {
+    type: "算术表达式相关漏洞",
+    reason: "除数为0",
+    code: "AECVL",
+    loc: "8:9",
+    info: "无",
+  },
+];
 
 import D3Marker from "../../components/D3Marker.vue";
 
@@ -225,7 +238,22 @@ export default {
   },
   data() {
     return {
-      info: {},
+      infos: [
+        {
+          type: "数组使用相关漏洞",
+          reason: "数组越界访问",
+          code: "AUCVL",
+          loc: "3:7",
+          info: "无",
+        },
+        {
+          type: "算术表达式相关漏洞",
+          reason: "除数为0",
+          code: "AECVL",
+          loc: "8:9",
+          info: "无",
+        },
+      ],
       sourceCodeList: [],
       proessStatus: "",
       percentage: 0,
@@ -294,6 +322,11 @@ int main() {
               type: "data_denpendence",
             },
             {
+              source: 9,
+              target: 10,
+              type: "data_denpendence",
+            },
+            {
               source: 7,
               target: 4,
               type: "control_denpendence",
@@ -318,47 +351,52 @@ int main() {
             {
               id: 2,
               name: "demo",
-              type: "Method",
+              type: "File",
             },
             {
               id: 3,
               name: "int a[2];",
-              type: "Decl",
+              type: "File",
             },
             {
               id: 4,
               name: "int b = a[3];",
-              type: "Decl",
+              type: "Statetment",
             },
             {
               id: 5,
               name: "int c = 'c';",
-              type: "Decl",
+              type: "File",
             },
             {
               id: 6,
               name: "int d = c",
-              type: "Decl",
+              type: "File",
             },
             {
               id: 7,
               name: "if(b>0)",
-              type: "If",
+              type: "File",
             },
             {
               id: 8,
               name: "b>0",
-              type: "IfCond",
+              type: "File",
             },
             {
               id: 9,
-              name: "printf('1');",
+              name: "int f = e / 0;",
               type: "Statetment",
+            },
+            {
+              id: 10,
+              name: "int e = 2;",
+              type: "File",
             },
           ],
         };
         this.sourceCodeList = sourceCodeList;
-        this.info = info;
+        this.infos = infos;
       }, 1000);
     },
     handleClick(tab, event) {
