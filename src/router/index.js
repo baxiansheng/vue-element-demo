@@ -1,87 +1,169 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Login from "../views/Login.vue";
 
 Vue.use(VueRouter);
 
+import Container from "../layout/Container.vue";
+
 const routes = [
   {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
     path: "/",
-    name: "Home",
-    component: Home,
+    component: Container,
+    redirect: "/home",
+    children: [
+      {
+        path: "home",
+        component: Home,
+        name: "Home",
+      },
+    ],
   },
   {
     path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: function () {
-      return import(/* webpackChunkName: "about" */ "../views/About.vue");
-    },
+    component: Container,
+    redirect: "/about/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/About.vue");
+        },
+        name: "About",
+      },
+    ],
   },
   {
     path: "/setting",
-    name: "Setting",
-    component: function () {
-      return import("../views/Setting.vue");
-    },
+    component: Container,
+    redirect: "/setting/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/Setting.vue");
+        },
+        name: "Setting",
+      },
+    ],
   },
   {
     path: "/document",
-    name: "Document",
-    component: function () {
-      return import("../views/Document.vue");
-    },
+    component: Container,
+    redirect: "/document/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/Document.vue");
+        },
+        name: "Document",
+      },
+    ],
   },
   {
     path: "/carousel",
-    name: "Carousel",
-    component: function () {
-      return import("../views/application/Carousel.vue");
-    },
+    component: Container,
+    redirect: "/carousel/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Carousel.vue");
+        },
+        name: "Carousel",
+      },
+    ],
   },
   {
     path: "/table",
-    name: "Table",
-    component: function () {
-      return import("../views/application/Table.vue");
-    },
+    component: Container,
+    redirect: "/table/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Table.vue");
+        },
+        name: "Table",
+      },
+    ],
   },
   {
     path: "/form",
-    name: "Form",
-    component: function () {
-      return import("../views/application/Form.vue");
-    },
+    component: Container,
+    redirect: "/form/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Form.vue");
+        },
+        name: "Form",
+      },
+    ],
   },
   {
     path: "/card",
-    name: "Card",
-    component: function () {
-      return import("../views/application/Card.vue");
-    },
+    component: Container,
+    redirect: "/table/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Card.vue");
+        },
+        name: "Card",
+      },
+    ],
   },
   {
     path: "/request",
-    name: "Request",
-    component: function () {
-      return import("../views/application/Request.vue");
-    },
+    component: Container,
+    redirect: "/request/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Request.vue");
+        },
+        name: "Request",
+      },
+    ],
   },
   {
     path: "/detect",
-    name: "Detect",
-    component: function () {
-      return import("../views/application/Detect.vue");
-    },
+    component: Container,
+    redirect: "/detect/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Detect.vue");
+        },
+        name: "Detect",
+      },
+    ],
   },
   {
     path: "/series",
-    name: "Series",
-    component: function () {
-      return import("../views/application/Series.vue");
-    },
+    component: Container,
+    redirect: "/series/index",
+    children: [
+      {
+        path: "index",
+        component: function () {
+          return import("../views/application/Series.vue");
+        },
+        name: "Series",
+      },
+    ],
   },
 ];
 
