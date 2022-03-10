@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MessageBox, Message } from "element-ui";
+import { Message } from "element-ui";
 
 const service = axios.create({
   timeout: 5000, // request timeout

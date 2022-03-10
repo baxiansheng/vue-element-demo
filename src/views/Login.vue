@@ -52,6 +52,8 @@
 </style>
 <script>
 import { login } from "@/api/auth.js";
+import { Message } from "element-ui";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -67,12 +69,26 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["login"]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          login(this.ruleForm).then(res => {
-            console.log(res);
-          })
+          this.login(this.ruleForm)
+            .then((res) => {
+              this.$router.push("/");
+              this.$notify({
+                title: "登录成功",
+                message: "欢迎" + res,
+                type: "success",
+              });
+            })
+            .catch((err) => {
+              Message({
+                message: err.message,
+                type: "error",
+                duration: 5 * 1000,
+              });
+            });
         } else {
           console.log("error submit!!");
           return false;

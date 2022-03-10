@@ -24,7 +24,7 @@
               <el-dropdown-item>删除</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>王小虎</span>
+          <span>{{ this.$store.state.userInfo.username }}</span>
         </div>
       </el-header>
 
