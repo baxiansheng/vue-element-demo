@@ -2,12 +2,24 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
+import store from "../store";
 
 Vue.use(VueRouter);
 
 import Container from "../layout/Container.vue";
 
 const routes = [
+  {
+    path: "/redirect",
+    component: Container,
+    hidden: true,
+    children: [
+      {
+        path: "/redirect/:path(.*)",
+        component: () => import("@/views/redirect/index"),
+      },
+    ],
+  },
   {
     path: "/login",
     name: "Login",
@@ -22,6 +34,7 @@ const routes = [
         path: "home",
         component: Home,
         name: "Home",
+        meta: { title: "主页", affix: true },
       },
     ],
   },
@@ -36,6 +49,7 @@ const routes = [
           return import("../views/About.vue");
         },
         name: "About",
+        meta: { title: "关于" },
       },
     ],
   },
@@ -50,6 +64,7 @@ const routes = [
           return import("../views/Setting.vue");
         },
         name: "Setting",
+        meta: { title: "设置" },
       },
     ],
   },
@@ -64,6 +79,7 @@ const routes = [
           return import("../views/Document.vue");
         },
         name: "Document",
+        meta: { title: "文档" },
       },
     ],
   },
@@ -78,6 +94,7 @@ const routes = [
           return import("../views/application/Carousel.vue");
         },
         name: "Carousel",
+        meta: { title: "滚动" },
       },
     ],
   },
@@ -92,6 +109,7 @@ const routes = [
           return import("../views/application/Table.vue");
         },
         name: "Table",
+        meta: { title: "表格" },
       },
     ],
   },
@@ -106,13 +124,14 @@ const routes = [
           return import("../views/application/Form.vue");
         },
         name: "Form",
+        meta: { title: "表单" },
       },
     ],
   },
   {
     path: "/card",
     component: Container,
-    redirect: "/table/index",
+    redirect: "/card/index",
     children: [
       {
         path: "index",
@@ -120,6 +139,7 @@ const routes = [
           return import("../views/application/Card.vue");
         },
         name: "Card",
+        meta: { title: "卡片" },
       },
     ],
   },
@@ -134,6 +154,7 @@ const routes = [
           return import("../views/application/Request.vue");
         },
         name: "Request",
+        meta: { title: "请求" },
       },
     ],
   },
@@ -148,6 +169,7 @@ const routes = [
           return import("../views/application/Detect.vue");
         },
         name: "Detect",
+        meta: { title: "检测" },
       },
     ],
   },
@@ -162,6 +184,7 @@ const routes = [
           return import("../views/application/Series.vue");
         },
         name: "Series",
+        meta: { title: "时序" },
       },
     ],
   },
@@ -169,6 +192,18 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login") {
+    next();
+  }
+  const { token } = store.state.userInfo;
+  if (to.path !== "/login" && token === "") {
+    next(`/login`);
+  } else {
+    next();
+  }
 });
 
 export default router;

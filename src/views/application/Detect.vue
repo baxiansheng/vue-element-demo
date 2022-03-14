@@ -233,6 +233,7 @@ let infos = [
 import D3Marker from "../../components/D3Marker.vue";
 
 export default {
+  name: "Detect",
   components: {
     D3Marker,
   },
@@ -400,7 +401,7 @@ int main() {
       }, 1000);
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      // console.log(tab, event);
     },
     detect() {
       this.centerDialogVisible = true;

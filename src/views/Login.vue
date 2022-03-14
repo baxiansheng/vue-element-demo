@@ -51,11 +51,11 @@
 }
 </style>
 <script>
-import { login } from "@/api/auth.js";
 import { Message } from "element-ui";
 import { mapActions } from "vuex";
 
 export default {
+  name: "Login",
   data() {
     return {
       ruleForm: {
@@ -78,8 +78,9 @@ export default {
               this.$router.push("/");
               this.$notify({
                 title: "登录成功",
-                message: "欢迎" + res,
+                message: "欢迎 " + res,
                 type: "success",
+                offset: 65,
               });
             })
             .catch((err) => {

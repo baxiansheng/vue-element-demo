@@ -34,3 +34,8 @@
   width: 480px;
 }
 </style>
+<script>
+export default {
+  name: "Card",
+};
+</script>

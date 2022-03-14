@@ -499,6 +499,7 @@ let op = {
 };
 
 export default {
+  name: "Series",
   data() {
     return {
       myecharts: "",

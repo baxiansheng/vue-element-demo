@@ -69,6 +69,7 @@
 
 <script>
 export default {
+  name: "Form",
   data() {
     return {
       ruleForm: {

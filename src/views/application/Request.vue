@@ -24,6 +24,7 @@
 import { getUsers } from "@/api/user.js";
 
 export default {
+  name: 'Request',
   data() {
     return {
       tableData: [],
